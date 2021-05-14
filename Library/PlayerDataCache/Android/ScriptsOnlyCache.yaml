@@ -787,7 +787,13 @@ ScriptsOnlyBuild:
     assemblyName: Unity.Timeline.dll
     namespaceName: UnityEngine.Timeline
     className: PlayableTrack
+  - hash:
+      serializedVersion: 2
+      Hash: e4fabdf71885faa62dedeb4f52da41fd
+    assemblyName: Assembly-CSharp-firstpass.dll
+    namespaceName: Better.StreamingAssets
+    className: BSA_TestSceneGUI
   platform: 13
   scenePathNames:
   - Assets/Scenes/SimpleObservation.unity
-  playerPath: C:/Users/Victo/Desktop/TravailBachelor/TBArGIS/application2.apk
+  playerPath: C:/Users/Victo/Desktop/TBok.apk

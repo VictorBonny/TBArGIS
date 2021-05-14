@@ -12,6 +12,7 @@ using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 using System.Threading.Tasks;
 using System.Runtime.Serialization.Formatters.Binary;
+using UnityEngine.Networking;
 
 public class Panorama : MonoBehaviour
 {
@@ -20,8 +21,8 @@ public class Panorama : MonoBehaviour
     private static int SAMPLE_SECONDS = 1;
 
 
-    private static string DEM_DATA_DIR = Application.streamingAssetsPath + "/mapHGT/";
-
+   
+    //private static string DEM_DATA_DIR = Application.streamingAssetsPath;
     private static int DEGREE_IN_SECONDS = 60 * 60;
 
     private static double SPAN = 60.0f;
@@ -183,10 +184,7 @@ public class Panorama : MonoBehaviour
        
         Array.Reverse(buffer, 0, buffer.Length);
 
-        UnityEngine.Debug.Log("test Value " + buffer.GetValue(1));
-        UnityEngine.Debug.Log("test Value " + buffer.GetValue(10));
-        UnityEngine.Debug.Log("test Value " + buffer.GetValue(100));
-        UnityEngine.Debug.Log("test Value " + buffer.GetValue(1000));
+
         return buffer;
     }
    
@@ -238,32 +236,33 @@ public class Panorama : MonoBehaviour
 
         if (!dict.ContainsKey(filebase))
         {
-            var b = importFile(Path.Combine(DEM_DATA_DIR,filebase));
+            UnityEngine.Debug.Log(filebase);
+            var b = importFile(filebase);
             dict.TryAdd(filebase, b);
-            //Console.WriteLine(b.Length);
+           
         }
         byte[] c;
         dict.TryGetValue(filebase, out c);
         return c;
     }
 
+    
     public static byte[] importFile(string file)
     {
-        byte[] buffer = new byte[32768];
-        UnityEngine.Debug.Log("Nom fichier " + file);
-        FileStream fileStream = new FileStream(file, FileMode.Open, FileAccess.Read);
-        using (MemoryStream ms = new MemoryStream())
-        {
-            while (true)
-            {
+        byte[] results = new byte[32768];
 
-                int read = fileStream.Read(buffer, 0, buffer.Length); //read each chunk
-                if (read <= 0) //check for end of file
-                    return ms.ToArray();
-                ms.Write(buffer, 0, read);
-            }
-        }
+        results = BetterStreamingAssets.ReadAllBytes(file);
+
+
+
+
+
+        return results;
+
+
     }
+
+
 
     public static short getHeight(double north, double east)
     {
