@@ -45,9 +45,12 @@ public class Panorama : MonoBehaviour
     private static double step = SAMPLE_IN_METERS;
 
     //private static string filebase;
-    private static double longitude = 7.51019f;
-    private static double latitude = 46.3363f;
-    private static double height = 1.6f;
+    /* private static double longitude = 7.51019f;
+     private static double latitude = 46.3363f;
+
+    */
+
+    private static double height;
 
     private static int image_height = 720;
     private static int horizon = (int)(image_height / 2);
@@ -59,11 +62,12 @@ public class Panorama : MonoBehaviour
     static int d_lat;
     static int d_lon;
 
-    public static byte[] getBuffer()
+    public static byte[] getBuffer(float latitude, float longitude, float altitude)
     {
         Stopwatch stopWatch = new Stopwatch();
         stopWatch.Start();
 
+        height = altitude;
         double north = latitude;
         double east = longitude;
         double bearing = 180;

@@ -14,7 +14,6 @@ public class DrawTexture : MonoBehaviour
     SpriteRenderer rend;
     Texture2D texture;
 
-    // Start is called before the first frame update
     void Start()
     {
         BetterStreamingAssets.Initialize();
@@ -25,17 +24,29 @@ public class DrawTexture : MonoBehaviour
         //1696/720
       texture  = new Texture2D(1696, 720, TextureFormat.ARGB32, false);
 
-      
-
-
-        var bufferColor = Panorama.getBuffer();
-
-         applyTexture(bufferColor);
-       
+        
 
     }
 
-   
+    void Update()
+    {
+
+        InvokeRepeating("UpdateTexture", 0f, 60f);
+
+
+    }
+    void UpdateTexture()
+    {
+
+        Debug.Log("Lat:" + GPS.Instance.latitude.ToString() + "  Long:" + GPS.Instance.longitude.ToString() + " alt:"+ GPS.Instance.latitude.ToString());
+
+        if (GPS.Instance.latitude != 0.0f && GPS.Instance.longitude != 0.0f && GPS.Instance.longitude != 0.0f)
+        {
+            var bufferColor = Panorama.getBuffer(GPS.Instance.latitude, GPS.Instance.longitude, GPS.Instance.altitude);
+            applyTexture(bufferColor);
+        }
+    }
+
 
 
     void applyTexture(byte[]buffer)

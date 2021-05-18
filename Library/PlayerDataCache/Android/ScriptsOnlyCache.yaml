@@ -3,7 +3,6 @@ ScriptsOnlyBuild:
     Assembly-CSharp.dll:
     - DrawTexture
     - GPS
-    - UpdateGPSText
     Unity.CollabProxy.Editor.dll:
     - Unity.Cloud.Collaborate.UserInterface.CollaborateWindow
     - Unity.Cloud.Collaborate.UserInterface.WindowCache
@@ -33,7 +32,6 @@ ScriptsOnlyBuild:
     - UnityEngine.UI.CanvasScaler
     - UnityEngine.UI.GraphicRaycaster
     - UnityEngine.UI.Image
-    - UnityEngine.UI.Text
   sceneClasses:
     Assets/Scenes/SimpleObservation.unity:
     - Class: 1
@@ -53,43 +51,41 @@ ScriptsOnlyBuild:
     - Class: 104
       Script: {instanceID: 0}
     - Class: 114
-      Script: {instanceID: 11856}
+      Script: {instanceID: 11858}
     - Class: 114
-      Script: {instanceID: 11872}
+      Script: {instanceID: 11874}
     - Class: 114
-      Script: {instanceID: 12080}
+      Script: {instanceID: 12132}
     - Class: 114
-      Script: {instanceID: 12126}
+      Script: {instanceID: 12708}
     - Class: 114
-      Script: {instanceID: 12306}
+      Script: {instanceID: 12758}
     - Class: 114
-      Script: {instanceID: 12704}
+      Script: {instanceID: 13244}
     - Class: 114
-      Script: {instanceID: 12754}
+      Script: {instanceID: 13652}
     - Class: 114
-      Script: {instanceID: 13240}
+      Script: {instanceID: 13666}
     - Class: 114
-      Script: {instanceID: 13646}
+      Script: {instanceID: 13684}
     - Class: 114
-      Script: {instanceID: 13660}
+      Script: {instanceID: 13886}
     - Class: 114
-      Script: {instanceID: 13678}
+      Script: {instanceID: 14026}
     - Class: 114
-      Script: {instanceID: 13880}
+      Script: {instanceID: 14058}
     - Class: 114
-      Script: {instanceID: 14020}
+      Script: {instanceID: 14236}
     - Class: 114
-      Script: {instanceID: 14052}
+      Script: {instanceID: 14246}
     - Class: 114
-      Script: {instanceID: 14230}
+      Script: {instanceID: 14262}
     - Class: 114
-      Script: {instanceID: 14240}
+      Script: {instanceID: 14408}
     - Class: 114
-      Script: {instanceID: 14256}
+      Script: {instanceID: 14534}
     - Class: 114
-      Script: {instanceID: 14402}
-    - Class: 114
-      Script: {instanceID: 14524}
+      Script: {instanceID: 14880}
     - Class: 115
       Script: {instanceID: 0}
     - Class: 128
@@ -151,6 +147,12 @@ ScriptsOnlyBuild:
     assemblyName: UnityEngine.TestRunner.dll
     namespaceName: UnityEngine.TestTools.TestRunner.Callbacks
     className: PlayerQuitHandler
+  - hash:
+      serializedVersion: 2
+      Hash: e4fabdf71885faa62dedeb4f52da41fd
+    assemblyName: Assembly-CSharp-firstpass.dll
+    namespaceName: Better.StreamingAssets
+    className: BSA_TestSceneGUI
   - hash:
       serializedVersion: 2
       Hash: 04e4a8b0447477cc4e933d9e5311188f
@@ -259,12 +261,6 @@ ScriptsOnlyBuild:
     assemblyName: UnityEngine.UI.dll
     namespaceName: UnityEngine.EventSystems
     className: PhysicsRaycaster
-  - hash:
-      serializedVersion: 2
-      Hash: a8aa1bf125b5f6ce383db5bc12ed2534
-    assemblyName: Assembly-CSharp.dll
-    namespaceName: 
-    className: UpdateGPSText
   - hash:
       serializedVersion: 2
       Hash: 7f5c55cb7b3151ce240452eb85500d32
@@ -787,13 +783,7 @@ ScriptsOnlyBuild:
     assemblyName: Unity.Timeline.dll
     namespaceName: UnityEngine.Timeline
     className: PlayableTrack
-  - hash:
-      serializedVersion: 2
-      Hash: e4fabdf71885faa62dedeb4f52da41fd
-    assemblyName: Assembly-CSharp-firstpass.dll
-    namespaceName: Better.StreamingAssets
-    className: BSA_TestSceneGUI
   platform: 13
   scenePathNames:
   - Assets/Scenes/SimpleObservation.unity
-  playerPath: C:/Users/Victo/Desktop/TBok.apk
+  playerPath: C:/Users/Victo/Desktop/TB.apk
