@@ -73,7 +73,6 @@ public class Panorama : MonoBehaviour
         double bearing = 180;
         int viewrange = 50000;
 
-        height += getHeight(north, east);
         bearing = (double)ConvertDegreesToRadians(cartesian(bearing));
         double halfspan = (double)ConvertDegreesToRadians(SPAN) / 2;
         double d_bearing = (double)Math.Asin((step) / viewrange);

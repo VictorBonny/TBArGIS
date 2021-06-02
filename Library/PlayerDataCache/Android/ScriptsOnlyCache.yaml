@@ -51,41 +51,39 @@ ScriptsOnlyBuild:
     - Class: 104
       Script: {instanceID: 0}
     - Class: 114
-      Script: {instanceID: 11858}
+      Script: {instanceID: 11856}
     - Class: 114
-      Script: {instanceID: 11874}
+      Script: {instanceID: 11872}
     - Class: 114
-      Script: {instanceID: 12132}
+      Script: {instanceID: 12130}
     - Class: 114
-      Script: {instanceID: 12708}
+      Script: {instanceID: 12706}
     - Class: 114
-      Script: {instanceID: 12758}
+      Script: {instanceID: 12756}
     - Class: 114
-      Script: {instanceID: 13244}
+      Script: {instanceID: 13242}
     - Class: 114
-      Script: {instanceID: 13652}
+      Script: {instanceID: 13650}
     - Class: 114
-      Script: {instanceID: 13666}
+      Script: {instanceID: 13664}
     - Class: 114
-      Script: {instanceID: 13684}
+      Script: {instanceID: 13682}
     - Class: 114
-      Script: {instanceID: 13886}
+      Script: {instanceID: 13884}
     - Class: 114
-      Script: {instanceID: 14026}
+      Script: {instanceID: 14024}
     - Class: 114
-      Script: {instanceID: 14058}
+      Script: {instanceID: 14056}
     - Class: 114
-      Script: {instanceID: 14236}
+      Script: {instanceID: 14234}
     - Class: 114
-      Script: {instanceID: 14246}
+      Script: {instanceID: 14244}
     - Class: 114
-      Script: {instanceID: 14262}
+      Script: {instanceID: 14260}
     - Class: 114
-      Script: {instanceID: 14408}
+      Script: {instanceID: 14406}
     - Class: 114
-      Script: {instanceID: 14534}
-    - Class: 114
-      Script: {instanceID: 14880}
+      Script: {instanceID: 14532}
     - Class: 115
       Script: {instanceID: 0}
     - Class: 128
@@ -786,4 +784,4 @@ ScriptsOnlyBuild:
   platform: 13
   scenePathNames:
   - Assets/Scenes/SimpleObservation.unity
-  playerPath: C:/Users/Victo/Desktop/TB.apk
+  playerPath: C:/Users/Victo/Desktop/TB2.apk
