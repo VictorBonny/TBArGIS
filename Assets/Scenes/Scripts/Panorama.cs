@@ -57,7 +57,7 @@ public class Panorama : MonoBehaviour
         double east = longitude;
         double bearing = bearingSmartphone;
 
-        viewrange = 25000;
+        viewrange = 20000;
 
         bearing = (double)ConvertDegreesToRadians(cartesian(bearing));
         double halfspan = (double)ConvertDegreesToRadians(SPAN) / 2;

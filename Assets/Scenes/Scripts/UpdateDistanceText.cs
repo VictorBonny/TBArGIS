@@ -50,7 +50,6 @@ public class UpdateDistanceText : MonoBehaviour
                 //on récupère la depth de la couleur correspondante qui est stocké dans la liste de Panorama
                 distancetemp = Panorama.colorDepth.FirstOrDefault(item => item.Item1.ToString().Equals(pixel_color.ToString())).Item2;
                 finalDistance = getDistanceByColor(distancetemp);
-
                 _tmPro.text = "Distance total : " + finalDistance + " mètres " + " - Orientation : " + GPS.Instance.bearingSmartphone;
             
         }

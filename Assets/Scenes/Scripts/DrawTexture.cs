@@ -48,8 +48,8 @@ public class DrawTexture : MonoBehaviour
 
 
 
-        //avoir la vue depuis Cran-Montana : Latitude : 46.3 Longitude: 7.4667 hauteur : ~ 1'000 + orientation du téléphone récupéré depuis la classe GPS
-        var bufferColor = Panorama.getBuffer(46.3f, 7.4667f, 1000, GPS.Instance.bearingSmartphone);
+        //avoir la vue depuis Sierre : Latitude : 46.2941311 Longitude: 7.5335362 hauteur : ~ 533 + orientation du téléphone récupéré depuis la classe GPS
+        var bufferColor = Panorama.getBuffer(46.2941311f, 7.5335362f, 533, GPS.Instance.bearingSmartphone);
     
   
         applyTexture(bufferColor);
