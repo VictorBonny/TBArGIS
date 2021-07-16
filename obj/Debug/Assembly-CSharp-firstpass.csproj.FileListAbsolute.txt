@@ -116,7 +116,6 @@ C:\Users\Victo\Desktop\TravailBachelor\TBArGIS\Temp\bin\Debug\System.Xml.XmlDocu
 C:\Users\Victo\Desktop\TravailBachelor\TBArGIS\Temp\bin\Debug\System.Xml.XmlSerializer.dll
 C:\Users\Victo\Desktop\TravailBachelor\TBArGIS\Temp\bin\Debug\System.Xml.XPath.dll
 C:\Users\Victo\Desktop\TravailBachelor\TBArGIS\Temp\bin\Debug\System.Xml.XPath.XDocument.dll
-C:\Users\Victo\Desktop\TravailBachelor\TBArGIS\Temp\bin\Debug\Unity.Rider.Editor.dll
 C:\Users\Victo\Desktop\TravailBachelor\TBArGIS\Temp\bin\Debug\Unity.Subsystem.Registration.dll
 C:\Users\Victo\Desktop\TravailBachelor\TBArGIS\Temp\bin\Debug\Unity.TextMeshPro.dll
 C:\Users\Victo\Desktop\TravailBachelor\TBArGIS\Temp\bin\Debug\Unity.TextMeshPro.Editor.dll
@@ -230,7 +229,6 @@ C:\Users\Victo\Desktop\TravailBachelor\TBArGIS\Temp\bin\Debug\Unity.XR.ARCore.Ed
 C:\Users\Victo\Desktop\TravailBachelor\TBArGIS\Temp\bin\Debug\Unity.Timeline.pdb
 C:\Users\Victo\Desktop\TravailBachelor\TBArGIS\Temp\bin\Debug\UnityEngine.XR.LegacyInputHelpers.pdb
 C:\Users\Victo\Desktop\TravailBachelor\TBArGIS\Temp\bin\Debug\Unity.XR.Management.Editor.pdb
-C:\Users\Victo\Desktop\TravailBachelor\TBArGIS\Temp\bin\Debug\Unity.Rider.Editor.pdb
 C:\Users\Victo\Desktop\TravailBachelor\TBArGIS\Temp\bin\Debug\UnityEditor.SpatialTracking.pdb
 C:\Users\Victo\Desktop\TravailBachelor\TBArGIS\Temp\bin\Debug\UnityEngine.SpatialTracking.pdb
 C:\Users\Victo\Desktop\TravailBachelor\TBArGIS\Temp\bin\Debug\Unity.VisualStudio.Editor.pdb
@@ -307,3 +305,15 @@ C:\Users\Victo\Desktop\TravailBachelor\TBArGIS\obj\Debug\Assembly-CSharp-firstpa
 C:\Users\Victo\Desktop\TravailBachelor\TBArGIS\obj\Debug\Assembly-CSharp-firstpass.csproj.CopyComplete
 C:\Users\Victo\Desktop\TravailBachelor\TBArGIS\obj\Debug\Assembly-CSharp-firstpass.dll
 C:\Users\Victo\Desktop\TravailBachelor\TBArGIS\obj\Debug\Assembly-CSharp-firstpass.pdb
+C:\Users\Victo\Desktop\TravailBachelor\TBArGIS\Temp\bin\Debug\Ionic.Zip.dll
+C:\Users\Victo\Desktop\TravailBachelor\TBArGIS\Temp\bin\Debug\log.dll
+C:\Users\Victo\Desktop\TravailBachelor\TBArGIS\Temp\bin\Debug\log4net.dll
+C:\Users\Victo\Desktop\TravailBachelor\TBArGIS\Temp\bin\Debug\ManagedWMI.dll
+C:\Users\Victo\Desktop\TravailBachelor\TBArGIS\Temp\bin\Debug\Microsoft.Dism.dll
+C:\Users\Victo\Desktop\TravailBachelor\TBArGIS\Temp\bin\Debug\Microsoft.Wim.dll
+C:\Users\Victo\Desktop\TravailBachelor\TBArGIS\Temp\bin\Debug\NativeWrapper.dll
+C:\Users\Victo\Desktop\TravailBachelor\TBArGIS\Temp\bin\Debug\NFluent.dll
+C:\Users\Victo\Desktop\TravailBachelor\TBArGIS\Temp\bin\Debug\Registry.dll
+C:\Users\Victo\Desktop\TravailBachelor\TBArGIS\Temp\bin\Debug\SystemHelper.dll
+C:\Users\Victo\Desktop\TravailBachelor\TBArGIS\Temp\bin\Debug\utilities.dll
+C:\Users\Victo\Desktop\TravailBachelor\TBArGIS\Temp\bin\Debug\zxing.dll

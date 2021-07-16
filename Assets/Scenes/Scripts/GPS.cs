@@ -11,14 +11,16 @@ public class GPS : MonoBehaviour
     public float latitude;
     public float longitude;
     public float altitude;
+    public float bearingSmartphone;
 
   
-    
-    // Start is called before the first frame update
+    // service de gps pour récupérer position du smartphone et son orientation
+   
     private void Start()
     {
 
         Instance = this;
+        Input.compass.enabled = true;
         DontDestroyOnLoad(gameObject);
         StartCoroutine(StartLocationService());
        
@@ -69,10 +71,14 @@ public class GPS : MonoBehaviour
         if (Input.location.status == LocationServiceStatus.Running)
         {
 
-
+            //latitute
             latitude = Input.location.lastData.latitude;
+            //longitude
             longitude = Input.location.lastData.longitude;
+            //altitude
             altitude = Input.location.lastData.altitude;
+            //orientation
+            bearingSmartphone = Input.compass.trueHeading;
 
         }
         else

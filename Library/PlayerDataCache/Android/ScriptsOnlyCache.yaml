@@ -3,16 +3,17 @@ ScriptsOnlyBuild:
     Assembly-CSharp.dll:
     - DrawTexture
     - GPS
+    - UpdateDistanceText
+    - Zoom
     Unity.CollabProxy.Editor.dll:
     - Unity.Cloud.Collaborate.UserInterface.CollaborateWindow
     - Unity.Cloud.Collaborate.UserInterface.WindowCache
-    Unity.Rider.Editor.dll:
-    - Packages.Rider.Editor.UnitTesting.CallbackData
     Unity.TextMeshPro.dll:
     - TMPro.TMP_FontAsset
     - TMPro.TMP_Settings
     - TMPro.TMP_SpriteAsset
     - TMPro.TMP_StyleSheet
+    - TMPro.TextMeshProUGUI
     Unity.XR.ARCore.Editor.dll:
     - UnityEditor.XR.ARCore.ARCoreSettings
     Unity.XR.ARFoundation.dll:
@@ -20,6 +21,7 @@ ScriptsOnlyBuild:
     - UnityEngine.XR.ARFoundation.ARCameraManager
     - UnityEngine.XR.ARFoundation.ARInputManager
     - UnityEngine.XR.ARFoundation.ARPoseDriver
+    - UnityEngine.XR.ARFoundation.ARRaycastManager
     - UnityEngine.XR.ARFoundation.ARSession
     - UnityEngine.XR.ARFoundation.ARSessionOrigin
     UnityEditor.TestRunner.dll:
@@ -51,39 +53,47 @@ ScriptsOnlyBuild:
     - Class: 104
       Script: {instanceID: 0}
     - Class: 114
-      Script: {instanceID: 11856}
+      Script: {instanceID: 11882}
     - Class: 114
-      Script: {instanceID: 11872}
+      Script: {instanceID: 11898}
     - Class: 114
-      Script: {instanceID: 12130}
+      Script: {instanceID: 12160}
     - Class: 114
-      Script: {instanceID: 12706}
+      Script: {instanceID: 12206}
     - Class: 114
-      Script: {instanceID: 12756}
+      Script: {instanceID: 12616}
     - Class: 114
-      Script: {instanceID: 13242}
+      Script: {instanceID: 12738}
     - Class: 114
-      Script: {instanceID: 13650}
+      Script: {instanceID: 12790}
     - Class: 114
-      Script: {instanceID: 13664}
+      Script: {instanceID: 13264}
     - Class: 114
-      Script: {instanceID: 13682}
+      Script: {instanceID: 13680}
     - Class: 114
-      Script: {instanceID: 13884}
+      Script: {instanceID: 13694}
     - Class: 114
-      Script: {instanceID: 14024}
+      Script: {instanceID: 13710}
     - Class: 114
-      Script: {instanceID: 14056}
+      Script: {instanceID: 13908}
     - Class: 114
-      Script: {instanceID: 14234}
+      Script: {instanceID: 13970}
     - Class: 114
-      Script: {instanceID: 14244}
+      Script: {instanceID: 14050}
     - Class: 114
-      Script: {instanceID: 14260}
+      Script: {instanceID: 14084}
     - Class: 114
-      Script: {instanceID: 14406}
+      Script: {instanceID: 14264}
     - Class: 114
-      Script: {instanceID: 14532}
+      Script: {instanceID: 14272}
+    - Class: 114
+      Script: {instanceID: 14288}
+    - Class: 114
+      Script: {instanceID: 14436}
+    - Class: 114
+      Script: {instanceID: 14446}
+    - Class: 114
+      Script: {instanceID: 14564}
     - Class: 115
       Script: {instanceID: 0}
     - Class: 128
@@ -321,6 +331,12 @@ ScriptsOnlyBuild:
     className: Mask
   - hash:
       serializedVersion: 2
+      Hash: 71bb6a6b6c8f052f948db64c7dd3ca4f
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: 
+    className: UpdateDistanceText
+  - hash:
+      serializedVersion: 2
       Hash: d251bf88db6c95a6b1aa0b69298da9ef
     assemblyName: UnityEngine.SpatialTracking.dll
     namespaceName: UnityEngine.SpatialTracking
@@ -447,7 +463,7 @@ ScriptsOnlyBuild:
     className: RemoteTestResultSender
   - hash:
       serializedVersion: 2
-      Hash: 71bb6a6b6c8f052f948db64c7dd3ca4f
+      Hash: e7b00a9d6802934fac436398bec245b7
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: DrawTexture
@@ -639,7 +655,7 @@ ScriptsOnlyBuild:
     className: MarkerTrack
   - hash:
       serializedVersion: 2
-      Hash: b43f83c7c6f6227c208ebe8be286e653
+      Hash: d49b77e9d722fb6c5cefbfbd7b9dad72
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: GPS
@@ -685,6 +701,12 @@ ScriptsOnlyBuild:
     assemblyName: UnityEngine.TestRunner.dll
     namespaceName: UnityEngine.TestTools.TestRunner.Callbacks
     className: PlayModeRunnerCallback
+  - hash:
+      serializedVersion: 2
+      Hash: 25ac62cd502b181b3c165ceb64e1bfb9
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: 
+    className: Zoom
   - hash:
       serializedVersion: 2
       Hash: 71bb6a6b6c8f052f948db64c7dd3ca4f
@@ -784,4 +806,4 @@ ScriptsOnlyBuild:
   platform: 13
   scenePathNames:
   - Assets/Scenes/SimpleObservation.unity
-  playerPath: C:/Users/Victo/Desktop/TB2.apk
+  playerPath: C:/Users/Victo/Desktop/TravailBachelor/prototypeTBArGIS.apk

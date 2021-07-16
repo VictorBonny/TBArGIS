@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using UnityEngine;
 using System;
 using System.Collections.Concurrent;
-using System.Collections.Generic;
 using System.Diagnostics;
 using System.Drawing;
 using System.IO;
@@ -13,65 +12,52 @@ using System.Runtime.InteropServices;
 using System.Threading.Tasks;
 using System.Runtime.Serialization.Formatters.Binary;
 using UnityEngine.Networking;
+using Debug = UnityEngine.Debug;
 
 public class Panorama : MonoBehaviour
 {
     public static Panorama Instance { set; get; }
 
     private static int SAMPLE_SECONDS = 1;
-
-
-   
-    //private static string DEM_DATA_DIR = Application.streamingAssetsPath;
+    public static int countPoint = 0;
     private static int DEGREE_IN_SECONDS = 60 * 60;
-
-    private static double SPAN = 60.0f;
-
+    private static double SPAN = 120.0f;
     private static int WHITE = 255;
     private static int DARKEST = 10;
     private static int BLACK = 0;
-
     private static double GLOBE = 3959.0f;
     private static double RADIUS = 6371000.0f;
-
     private static int SAMPLES_PER_ROW = (DEGREE_IN_SECONDS / SAMPLE_SECONDS) + 1;
     private static int DEGREE_IN_SAMPLES = DEGREE_IN_SECONDS / SAMPLE_SECONDS;
     private static int BYTES_PER_ROW = SAMPLES_PER_ROW * 2;
     private static bool OCEANFRONT = false;
-
     private static double DEGREE_IN_METERS = (double)((RADIUS * 2 * Math.PI) / 360.0);
     private static double SAMPLE_IN_METERS = DEGREE_IN_METERS / (60 * (60 / SAMPLE_SECONDS));
-
     private static double step = SAMPLE_IN_METERS;
-
-    //private static string filebase;
-    /* private static double longitude = 7.51019f;
-     private static double latitude = 46.3363f;
-
-    */
-
     private static double height;
-
-    private static int image_height = 720;
+    private static int image_height = 1080;
     private static int horizon = (int)(image_height / 2);
-
     private static ConcurrentDictionary<string, byte[]> dict = new ConcurrentDictionary<string, byte[]>(10, 3);
-
+    public static List<Tuple<System.Drawing.Color, int>> colorDepth;
+    public static int viewrange;
+    public static int width;
     static int lat;
     static int lon;
     static int d_lat;
     static int d_lon;
 
-    public static byte[] getBuffer(float latitude, float longitude, float altitude)
+
+    public static byte[] getBuffer(float latitude, float longitude, float altitude, float bearingSmartphone)
     {
         Stopwatch stopWatch = new Stopwatch();
         stopWatch.Start();
-
+        colorDepth = new List<Tuple<System.Drawing.Color, int>>();
         height = altitude;
         double north = latitude;
         double east = longitude;
-        double bearing = 180;
-        int viewrange = 50000;
+        double bearing = bearingSmartphone;
+
+        viewrange = 25000;
 
         bearing = (double)ConvertDegreesToRadians(cartesian(bearing));
         double halfspan = (double)ConvertDegreesToRadians(SPAN) / 2;
@@ -91,33 +77,34 @@ public class Panorama : MonoBehaviour
 
 
         dict.Clear();
-        int width = allLook.Length;
-   
+        width = allLook.Length;
 
 
-        var rect = new Rectangle(0, 0, width, 720);
+
+        var rect = new Rectangle(0, 0, width, 1080);
+
         var depthImage = 32 / 8; //bytes per pixel
 
-        var buffer = new byte[1696 * 720 * depthImage];
+        var buffer = new byte[width * 1080 * depthImage];
 
         Parallel.For(0, buffer.Length, (i) =>
         {
             buffer[i] = 255;
         });
-        //copy pixels to buffer
-        //Marshal.Copy(data.Scan0, buffer, 0, buffer.Length);
+
 
 
         Parallel.For(0, allLook.Length, (i) =>
         {
+            List<Tuple<short, int, int>> pointList = new List<Tuple<short, int, int>>();
             int x = i;
             List<Tuple<short, int, int>> t = allLook[i];
-            List<Tuple<short, int, int>> pointList = new List<Tuple<short, int, int>>();
             pointList.Add(t.ElementAt(0));
             pointList.AddRange(t);
             pointList.Add(new Tuple<short, int, int>(0, 0, image_height));
             for (int depth = pointList.Count - 3; depth > 0; depth--)
             {
+
                 System.Drawing.Color ridgecolor;
                 System.Drawing.Color color;
                 List<Tuple<short, int, int>> context = pointList.GetRange(depth - 1, 4);
@@ -126,24 +113,50 @@ public class Panorama : MonoBehaviour
                 else if (context.ElementAt(1).Item2 > context.ElementAt(0).Item2)
                 {
                     if (OCEANFRONT && (context.ElementAt(1).Item1 == 0))
-                        ridgecolor = color = System.Drawing.Color.Blue;
+                        ridgecolor = color = System.Drawing.Color.Black;
+
                     else
                     {
                         bool testColor = false;
+
                         if (testColor)
                         {
                             float divider = pointList.Count / (float)(WHITE - DARKEST);
                             int gray = (int)(depth / divider) + DARKEST;
+
                             //Console.WriteLine("gray: " + gray);
                             color = System.Drawing.Color.FromArgb(gray, gray, gray, gray);
+
+                            Tuple<System.Drawing.Color, int> temp = new Tuple<System.Drawing.Color, int>(color, depth);
+
+
+                            //on stocke chaque couleur unique avec sa depth de référence
+                            if (!colorDepth.Contains(temp))
+                            {
+                                colorDepth.Add(temp);
+                            }
+
                         }
                         else
                         {
                             float code = ((float)depth / (float)pointList.Count) * 360.0f;
-                            Console.WriteLine("gray: " + code);
-                            color = HSVtoRGB(code, 1.0f, 1.0f, 1.0f);//Color.FromArgb(gray, gray, gray, gray);
+
+
+                            color = newHSVtoRGB(code, 1.0f, 1.0f, 1.0f);//Color.FromArgb(gray, gray, gray, gray);
+
+
+                            Tuple<System.Drawing.Color, int> temp = new Tuple<System.Drawing.Color, int>(color, depth);
+
+                            //on stocke chaque couleur unique avec sa depth de référence
+                            if (!colorDepth.Contains(temp))
+                            {
+
+                                colorDepth.Add(temp);
+                            }
                         }
-                        ridgecolor = System.Drawing.Color.Black;
+
+                           ridgecolor = System.Drawing.Color.Black;
+
                     }
                     int y = (int)Math.Max(0, context.ElementAt(1).Item3);
 
@@ -154,8 +167,10 @@ public class Panorama : MonoBehaviour
                             buffer[offset] = ridgecolor.R;
                             buffer[offset + 1] = ridgecolor.G;
                             buffer[offset + 2] = ridgecolor.B;
+
+
                         }
-                        //image.SetPixel(x, y, ridgecolor);
+
                         else if ((y > context.ElementAt(2).Item3) /*|| testPix(x, y, ridgecolor, image)*/)
                             if (y < image_height)
                             {
@@ -175,23 +190,24 @@ public class Panorama : MonoBehaviour
                             buffer[offset + 2] = color.B;
                         }
                     }
+
                 }
 
             }
         });
-       
+
+
+
 
 
         stopWatch.Stop();
         Console.WriteLine("RunTime " + stopWatch.ElapsedMilliseconds);
-       
+
         Array.Reverse(buffer, 0, buffer.Length);
 
 
         return buffer;
     }
-   
-
 
 
     private static double cartesian(double bearing)
@@ -210,7 +226,7 @@ public class Panorama : MonoBehaviour
 
         int latitude = (int)north;
         int longitude = (int)east;
-        //Console.WriteLine("latitude: " + latitude);
+
 
 
         if (latitude < 0)
@@ -239,17 +255,17 @@ public class Panorama : MonoBehaviour
 
         if (!dict.ContainsKey(filebase))
         {
-            UnityEngine.Debug.Log(filebase);
+
             var b = importFile(filebase);
             dict.TryAdd(filebase, b);
-           
+
         }
         byte[] c;
         dict.TryGetValue(filebase, out c);
         return c;
     }
 
-    
+
     public static byte[] importFile(string file)
     {
         byte[] results = new byte[32768];
@@ -277,7 +293,7 @@ public class Panorama : MonoBehaviour
 
         int offset = north_offset((int)Nmin, (int)getDSecond(Nmin), d_lat) + east_offset((int)Emin, (int)getDSecond(Emin), d_lon);
         byte[] buffer = new byte[2];
-        //Console.WriteLine("off =" + offset);
+
         buffer[0] = b[offset + 1];
         buffer[1] = b[offset];
         short ret = BitConverter.ToInt16(buffer, 0);
@@ -344,16 +360,19 @@ public class Panorama : MonoBehaviour
             east = t.Item2;
             traversed += d_travel;
             count++;
+
+
+
         }
         return elevations;
     }
     public static double CopySign(double num1, double num2)
     {
-      
+
         if (num2 < 0)
-            return num1*-1.0;
-        else 
-        return num1;
+            return num1 * -1.0;
+        else
+            return num1;
     }
     public static Tuple<double, double> move(double north, double east, double angle, double d_travel, bool bearing)
     {
@@ -390,6 +409,79 @@ public class Panorama : MonoBehaviour
             return System.Drawing.Color.FromArgb(255, t, p, v);
         else
             return System.Drawing.Color.FromArgb(255, v, p, q);
+    }
+
+    public static System.Drawing.Color newHSVtoRGB(float hue, float saturation, float value, float alpha)
+    {
+        double r = 0, g = 0, b = 0;
+
+        if (saturation == 0)
+        {
+            r = value;
+            g = value;
+            b = value;
+        }
+        else
+        {
+            int i;
+            double f, p, q, t;
+
+            if (hue == 360)
+                hue = 0;
+            else
+                hue = hue / 60;
+
+            i = (int)Math.Truncate(hue);
+            f = hue - i;
+
+            p = value * (1.0 - saturation);
+            q = value * (1.0 - (saturation * f));
+            t = value * (1.0 - (saturation * (1.0 - f)));
+
+            switch (i)
+            {
+                case 0:
+                    r = value;
+                    g = t;
+                    b = p;
+                    break;
+
+                case 1:
+                    r = q;
+                    g = value;
+                    b = p;
+                    break;
+
+                case 2:
+                    r = p;
+                    g = value;
+                    b = t;
+                    break;
+
+                case 3:
+                    r = p;
+                    g = q;
+                    b = value;
+                    break;
+
+                case 4:
+                    r = t;
+                    g = p;
+                    b = value;
+                    break;
+
+                default:
+                    r = value;
+                    g = p;
+                    b = q;
+                    break;
+            }
+
+        }
+
+
+
+        return System.Drawing.Color.FromArgb(255, (int)(r * 255), (int)(g * 255), (int)(b * 255));
     }
 
 }
