@@ -1,5 +1,5 @@
 ## Travail de Bachelor 2020 -  Augmented Reality for GIS applications
-
+#### Création d'un prototype d'application de réalité augmentée qui intègre des données GIS
 # Environnement de travail :
 * Unity - version 2020.1.16f1
 * Visual Studio 2019
