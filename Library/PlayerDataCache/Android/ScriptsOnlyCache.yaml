@@ -4,7 +4,6 @@ ScriptsOnlyBuild:
     - DrawTexture
     - GPS
     - UpdateDistanceText
-    - Zoom
     Unity.CollabProxy.Editor.dll:
     - Unity.Cloud.Collaborate.UserInterface.CollaborateWindow
     - Unity.Cloud.Collaborate.UserInterface.WindowCache
@@ -90,8 +89,6 @@ ScriptsOnlyBuild:
       Script: {instanceID: 14242}
     - Class: 114
       Script: {instanceID: 14388}
-    - Class: 114
-      Script: {instanceID: 14398}
     - Class: 114
       Script: {instanceID: 14516}
     - Class: 115
@@ -806,4 +803,4 @@ ScriptsOnlyBuild:
   platform: 13
   scenePathNames:
   - Assets/Scenes/SimpleObservation.unity
-  playerPath: C:/Users/Victo/Desktop/TravailBachelor/prototypeTBArGIS.apk
+  playerPath: C:/Users/Victo/Desktop/TravailBachelor/APKS/TBArGISv1.apk

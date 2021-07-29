@@ -27,6 +27,7 @@ public class GPS : MonoBehaviour
     }
 
 
+    //démarrage du service de location
     IEnumerator StartLocationService()
     {
 
@@ -56,7 +57,7 @@ public class GPS : MonoBehaviour
         }
         else
         {
-
+            //si ok chaque 0,2 secondes on raffraichit les données
             InvokeRepeating("UpdateLocation", 0f, 0.2f);
         }
 

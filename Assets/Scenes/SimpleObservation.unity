@@ -719,7 +719,6 @@ GameObject:
   - component: {fileID: 954820296}
   - component: {fileID: 954820299}
   - component: {fileID: 954820298}
-  - component: {fileID: 954820297}
   m_Layer: 5
   m_Name: OverlayLandscape
   m_TagString: Untagged
@@ -815,20 +814,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 954820288}
   m_CullTransparentMesh: 0
---- !u!114 &954820297
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 954820288}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ecf74f9efe60d27439653863f098739a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  canvas: {fileID: 954820291}
-  zoomSpeed: 0.01
 --- !u!114 &954820298
 MonoBehaviour:
   m_ObjectHideFlags: 0

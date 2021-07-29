@@ -34,8 +34,8 @@ public class DrawTexture : MonoBehaviour
 
 
 
-        //beaucoup de calculs à faire donc on doit ralentir l'appel la méthode
-        //update chaque minute
+        //timer update 60sec sinon on peut pas utiliser les fonctions de la méthode
+        //timer start 10 sec sinon outils de location smartphone pas forcément ok
         InvokeRepeating("UpdateTexture", 10f, 60f);
 
 
@@ -46,17 +46,12 @@ public class DrawTexture : MonoBehaviour
     public void UpdateTexture()
     {
 
+       
+        //position fixée Sion + orientation du téléphone récupéré depuis la classe GPS
+        var bufferColor = Panorama.getBuffer(46.2941311f, 7.5335362f, 600,GPS.Instance.bearingSmartphone);
 
 
-        //avoir la vue depuis Sierre : Latitude : 46.2941311 Longitude: 7.5335362 hauteur : ~ 533 + orientation du téléphone récupéré depuis la classe GPS
-        var bufferColor = Panorama.getBuffer(46.2941311f, 7.5335362f, 533, GPS.Instance.bearingSmartphone);
-    
-  
         applyTexture(bufferColor);
-
-
-
-
 
     }
 
@@ -65,8 +60,8 @@ public class DrawTexture : MonoBehaviour
     //creation texture d'après buffer
     void applyTexture(byte[] buffer)
     {
-        texture = new Texture2D(Panorama.width, 1080, TextureFormat.ARGB32, false);
 
+        texture = new Texture2D(Panorama.width, 1080, TextureFormat.ARGB32, false);
 
 
         var colorArray = new Color32[buffer.Length / 4];
@@ -119,7 +114,10 @@ public class DrawTexture : MonoBehaviour
 
 
         //tableau avec couleur des ridge et le reste transparent pour la texture
-        texture.SetPixels32(colorArrayClear);
+       // texture.SetPixels32(colorArrayClear);
+        
+        
+        texture.SetPixels32(colorArray);
 
 
 
@@ -135,7 +133,7 @@ public class DrawTexture : MonoBehaviour
 
     }
 
-    //garder référence couleur pour chaque pixel de la texture
+    //garder référence couleur pour chaque pixel de la texture en fonction de position x et y
     private void setPixelInformation(Color32[] colorArray)
     {
     

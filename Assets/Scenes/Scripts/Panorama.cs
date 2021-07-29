@@ -47,10 +47,10 @@ public class Panorama : MonoBehaviour
     static int d_lon;
 
 
+    //les couleurs pour le calque
     public static byte[] getBuffer(float latitude, float longitude, float altitude, float bearingSmartphone)
     {
-        Stopwatch stopWatch = new Stopwatch();
-        stopWatch.Start();
+
         colorDepth = new List<Tuple<System.Drawing.Color, int>>();
         height = altitude;
         double north = latitude;
@@ -64,10 +64,16 @@ public class Panorama : MonoBehaviour
         double d_bearing = (double)Math.Asin((step) / viewrange);
         double angle = bearing + halfspan;
         int widhtSteps = (int)((Math.Abs(bearing - halfspan) - Math.Abs(angle)) / Math.Abs(d_bearing)) + 1;
-        Console.WriteLine("loop: " + widhtSteps);
+
+        if (widhtSteps < 0)
+        {
+            widhtSteps *= -1;
+        }
 
         List<Tuple<short, int, int>>[] allLook = new List<Tuple<short, int, int>>[widhtSteps];
 
+
+        //assembler chaque strie
         Parallel.For(0, widhtSteps, i =>
         {
             double selectAngle = angle - i * Math.Abs(d_bearing);
@@ -93,7 +99,7 @@ public class Panorama : MonoBehaviour
         });
 
 
-
+        //traiter chaque point trouvé pour lui attribuer une couleur en fonction de sa position 
         Parallel.For(0, allLook.Length, (i) =>
         {
             List<Tuple<short, int, int>> pointList = new List<Tuple<short, int, int>>();
@@ -124,17 +130,18 @@ public class Panorama : MonoBehaviour
                             float divider = pointList.Count / (float)(WHITE - DARKEST);
                             int gray = (int)(depth / divider) + DARKEST;
 
-                            //Console.WriteLine("gray: " + gray);
                             color = System.Drawing.Color.FromArgb(gray, gray, gray, gray);
 
                             Tuple<System.Drawing.Color, int> temp = new Tuple<System.Drawing.Color, int>(color, depth);
 
 
-                            //on stocke chaque couleur unique avec sa depth de référence
+                            //on stocke chaque couleur unique avec sa profondeur de référence
                             if (!colorDepth.Contains(temp))
                             {
+
                                 colorDepth.Add(temp);
                             }
+
 
                         }
                         else
@@ -142,22 +149,25 @@ public class Panorama : MonoBehaviour
                             float code = ((float)depth / (float)pointList.Count) * 360.0f;
 
 
-                            color = newHSVtoRGB(code, 1.0f, 1.0f, 1.0f);//Color.FromArgb(gray, gray, gray, gray);
+                            color = HSVtoRGB(code, 1.0f, 1.0f, 1.0f);//Color.FromArgb(gray, gray, gray, gray);
 
 
                             Tuple<System.Drawing.Color, int> temp = new Tuple<System.Drawing.Color, int>(color, depth);
 
-                            //on stocke chaque couleur unique avec sa depth de référence
+
+                            //on stocke chaque couleur unique avec sa profondeur de référence
                             if (!colorDepth.Contains(temp))
                             {
 
                                 colorDepth.Add(temp);
                             }
+
                         }
 
-                           ridgecolor = System.Drawing.Color.Black;
+                        ridgecolor = System.Drawing.Color.Black;
 
                     }
+
                     int y = (int)Math.Max(0, context.ElementAt(1).Item3);
 
                     if (y < context.ElementAt(2).Item3)
@@ -197,12 +207,6 @@ public class Panorama : MonoBehaviour
         });
 
 
-
-
-
-        stopWatch.Stop();
-        Console.WriteLine("RunTime " + stopWatch.ElapsedMilliseconds);
-
         Array.Reverse(buffer, 0, buffer.Length);
 
 
@@ -210,6 +214,7 @@ public class Panorama : MonoBehaviour
     }
 
 
+    //normaliser le bearing
     private static double cartesian(double bearing)
     {
         double converted = (90 - bearing) % 360;
@@ -220,6 +225,8 @@ public class Panorama : MonoBehaviour
         return converted;
     }
 
+
+    //trouver le bon fichier en fonction de latitude et longitude
     private static byte[] getHgtFile(double north, double east)
     {
         string filebase;
@@ -266,23 +273,19 @@ public class Panorama : MonoBehaviour
     }
 
 
+    //lecture des fichiers en fonction du nom
     public static byte[] importFile(string file)
     {
         byte[] results = new byte[32768];
 
         results = BetterStreamingAssets.ReadAllBytes(file);
-
-
-
-
-
         return results;
 
 
     }
 
 
-
+    //retourner la hauteur de la position
     public static short getHeight(double north, double east)
     {
         byte[] b = getHgtFile(north, east);
@@ -301,16 +304,19 @@ public class Panorama : MonoBehaviour
         return ret;
     }
 
+    //transformer degréS en seconde pour DMS
     public static double getDMinute(double Ddegree)
     {
         return (Ddegree - (int)(Ddegree)) * 60;
     }
 
+    //transformer degré en seconde pour DMS
     public static double getDSecond(double Dmin)
     {
         return ((Dmin - (int)Dmin) * 60);
     }
 
+    //décalage vers le nord
     public static int north_offset(int northM, int northS, double direction)
     {
         int row = (int)(Math.Abs((northM * 60) + northS) / Math.Abs(direction));
@@ -319,6 +325,7 @@ public class Panorama : MonoBehaviour
         return row * BYTES_PER_ROW;
     }
 
+    //décalage vers l'est
     public static int east_offset(int eastM, int eastS, double direction)
     {
         int offest = (int)Math.Abs((eastM * 60 + eastS) / Math.Abs(direction));
@@ -327,13 +334,17 @@ public class Panorama : MonoBehaviour
         return offest * 2;
     }
 
+    //transformer degrés en radiant
     public static double ConvertDegreesToRadians(double degrees)
     {
         double radians = (Math.PI / 180) * degrees;
         return (radians);
     }
 
+    //transformer radiant en degrés
     public static double ConvertRadiansToDegrees(double radians) { double degrees = (180 / Math.PI) * radians; return (degrees); }
+
+    //traiter une strie du paysage pour récupéré les points qui seront transformés en couleurs
     public static List<Tuple<short, int, int>> look(double angle, double north, double east, int distance, double d_travel, double d_bearing)
     {
         List<Tuple<short, int, int>> elevations = new List<Tuple<short, int, int>>();
@@ -366,6 +377,9 @@ public class Panorama : MonoBehaviour
         }
         return elevations;
     }
+
+
+    //si négatif on garde la valeur mais pas le sens du vecteur 
     public static double CopySign(double num1, double num2)
     {
 
@@ -374,6 +388,8 @@ public class Panorama : MonoBehaviour
         else
             return num1;
     }
+
+    //décalage sur la strie
     public static Tuple<double, double> move(double north, double east, double angle, double d_travel, bool bearing)
     {
         double radian = (double)ConvertDegreesToRadians(angle);
@@ -386,6 +402,7 @@ public class Panorama : MonoBehaviour
 
     }
 
+    //transformation des données des points en couleurs
     public static System.Drawing.Color HSVtoRGB(float hue, float saturation, float value, float alpha)
     {
         int hi = Convert.ToInt32(Math.Floor(hue / 60)) % 6;
@@ -411,78 +428,6 @@ public class Panorama : MonoBehaviour
             return System.Drawing.Color.FromArgb(255, v, p, q);
     }
 
-    public static System.Drawing.Color newHSVtoRGB(float hue, float saturation, float value, float alpha)
-    {
-        double r = 0, g = 0, b = 0;
-
-        if (saturation == 0)
-        {
-            r = value;
-            g = value;
-            b = value;
-        }
-        else
-        {
-            int i;
-            double f, p, q, t;
-
-            if (hue == 360)
-                hue = 0;
-            else
-                hue = hue / 60;
-
-            i = (int)Math.Truncate(hue);
-            f = hue - i;
-
-            p = value * (1.0 - saturation);
-            q = value * (1.0 - (saturation * f));
-            t = value * (1.0 - (saturation * (1.0 - f)));
-
-            switch (i)
-            {
-                case 0:
-                    r = value;
-                    g = t;
-                    b = p;
-                    break;
-
-                case 1:
-                    r = q;
-                    g = value;
-                    b = p;
-                    break;
-
-                case 2:
-                    r = p;
-                    g = value;
-                    b = t;
-                    break;
-
-                case 3:
-                    r = p;
-                    g = q;
-                    b = value;
-                    break;
-
-                case 4:
-                    r = t;
-                    g = p;
-                    b = value;
-                    break;
-
-                default:
-                    r = value;
-                    g = p;
-                    b = q;
-                    break;
-            }
-
-        }
-
-
-
-        return System.Drawing.Color.FromArgb(255, (int)(r * 255), (int)(g * 255), (int)(b * 255));
-    }
 
 }
 
