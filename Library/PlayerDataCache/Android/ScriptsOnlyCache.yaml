@@ -803,4 +803,4 @@ ScriptsOnlyBuild:
   platform: 13
   scenePathNames:
   - Assets/Scenes/SimpleObservation.unity
-  playerPath: C:/Users/Victo/Desktop/TravailBachelor/APKS/TBArGISv1.apk
+  playerPath: C:/Users/Victo/Desktop/TravailBachelor/APKS/prototype.apk

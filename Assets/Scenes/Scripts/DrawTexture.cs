@@ -117,7 +117,7 @@ public class DrawTexture : MonoBehaviour
        // texture.SetPixels32(colorArrayClear);
         
         
-        texture.SetPixels32(colorArray);
+        texture.SetPixels32(colorArrayClear);
 
 
 
