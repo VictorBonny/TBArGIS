@@ -51,7 +51,7 @@ public class UpdateDistanceText : MonoBehaviour
                finalDistance = getDistanceByColor(distancetemp);
             }
             catch
-            {85
+            {
 
                 _tmPro.text = "Distance indisponible pour ce point !";
               
