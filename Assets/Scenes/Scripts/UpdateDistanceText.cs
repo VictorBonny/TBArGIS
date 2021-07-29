@@ -63,7 +63,7 @@ public class UpdateDistanceText : MonoBehaviour
         {
 
 
-            _tmPro.text = "Distance total depuis le point "+ lastX+ " " +lastY +" : " + finalDistance + " mètres !";
+            _tmPro.text = "Distance totale depuis le point "+ lastX+ " " +lastY +" : " + finalDistance + " mètres !";
 
 
         }
