@@ -30,6 +30,8 @@ public class UpdateDistanceText : MonoBehaviour
 
     void Update()
     {
+        _tmPro.text = "Dès que le terrain est chargé, cliquez pour afficher la distance.";
+
 
 
         if (Input.touchCount == 1)
